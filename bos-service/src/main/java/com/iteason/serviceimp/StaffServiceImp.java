@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.iteason.dao.StaffDao;
 import com.iteason.domain.Staff;
 import com.iteason.service.StaffService;
+import com.iteason.utils.PageBean;
 @Service
 @Transactional
 public class StaffServiceImp implements StaffService {
@@ -17,6 +18,12 @@ public class StaffServiceImp implements StaffService {
 	public void addStaff(Staff staff) {
 		// 增加取派员
 		staffDao.save(staff);
+	}
+
+	@Override
+	public PageBean queryPage(PageBean pageBean) {
+		PageBean pageQuery = staffDao.pageQuery(pageBean);
+		return pageQuery;
 	}
 
 }
