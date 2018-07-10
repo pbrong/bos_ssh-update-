@@ -129,7 +129,7 @@
 			pageList: [30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/staff.json",
+			url : "${pageContext.request.contextPath}/staffAction_pageQuery",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow

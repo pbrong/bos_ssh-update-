@@ -12,7 +12,6 @@ import com.iteason.dao.UserDao;
 import com.iteason.domain.User;
 import com.iteason.service.UserService;
 @Service
-@Transactional
 public class UserServiceImp implements UserService {
 	@Autowired
 	private UserDao userDao;
