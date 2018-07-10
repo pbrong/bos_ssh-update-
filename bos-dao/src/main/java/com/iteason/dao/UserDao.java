@@ -7,7 +7,7 @@ import org.hibernate.criterion.DetachedCriteria;
 
 import com.iteason.domain.User;
 
-public interface UserDao extends IBaseDao<User>{
+public interface UserDao extends BaseDao<User>{
 
 	User findUserByUsernameAndPassword(String username, String password);
 
