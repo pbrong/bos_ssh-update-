@@ -80,9 +80,14 @@
 		</div>
 		<div data-options="region:'east'" title="展示栏" style="width:150px;">东</div>
 		<div data-options="region:'center'" >
+		
 			<div class="easyui-tabs" id="tabs">
-				<div title="公示" data-options="iconCls:'icon-tip'"></div>
+				<div title="公示" data-options="iconCls:'icon-tip'">
+					
+				</div>
 			</div>
+			
 		</div>
+		
 </body>
 </html>
