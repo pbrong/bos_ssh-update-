@@ -8,4 +8,6 @@ public interface StaffService {
 	public void addStaff(Staff staff);
 
 	public PageBean queryPage(PageBean pageBean);
+
+	public void deleteStaffs(String id);
 }

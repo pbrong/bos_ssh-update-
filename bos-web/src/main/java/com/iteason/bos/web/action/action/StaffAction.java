@@ -74,4 +74,26 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
 		return NONE;
 	}
 	
+	
+	private String ids;
+	public void setIds(String ids) {
+		this.ids = ids;
+	}
+	/**
+	 * 
+	 * @author 阿荣
+	 * @Description: 取派员的作废
+	 * @date: 2018年7月10日 下午3:54:01
+	 * @return
+	 */
+	public String deleteStaffs(){
+		//System.out.println(ids);
+		String[] idArray = ids.split(",");
+		for(String id:idArray){
+			//遍历每个id并且修改这个id的deltag参数为0
+			staffService.deleteStaffs(id);
+		}
+		return "toStaff";
+	}
+	
 }

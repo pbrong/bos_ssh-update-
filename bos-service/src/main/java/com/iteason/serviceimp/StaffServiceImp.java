@@ -26,4 +26,11 @@ public class StaffServiceImp implements StaffService {
 		return pageQuery;
 	}
 
+	@Override
+	public void deleteStaffs(String id) {
+		//  修改staff的deltag为0
+		staffDao.deleteStaffs(id);
+		
+	}
+
 }

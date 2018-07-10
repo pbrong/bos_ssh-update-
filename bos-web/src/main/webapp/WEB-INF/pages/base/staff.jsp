@@ -57,7 +57,7 @@
 					}
 					var ids = array.join(",");//1,2,3...
 					//alert(ids);
-					window.location.href="${pageContext.request.contextPath}/staffAction_deleteStaffs?ids = "+ids;
+					window.location.href="${pageContext.request.contextPath}/staffAction_deleteStaffs?ids="+ids;
 				}
 			});
 		}
