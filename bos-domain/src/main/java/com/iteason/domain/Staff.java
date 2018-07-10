@@ -15,7 +15,7 @@ public class Staff implements java.io.Serializable {
 	private String name;
 	private String telephone;
 	private String haspda = "0";//是否有PDA，1：有 0：无
-	private String deltag;
+	private String deltag = "1";//1表示正常使用，0表示作废
 	private String station;
 	private String standard;
 	private Set decidedzones = new HashSet(0);

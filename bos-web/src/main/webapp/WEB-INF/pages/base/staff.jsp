@@ -37,7 +37,31 @@
 	}
 	
 	function doDelete(){
-		alert("删除...");
+		//alert("删除...");
+		//获得数据表格中被选到的数据
+		var rows = $("#grid").datagrid("getSelections");
+		//alert(rows[0].name);
+		if(rows.length == 0){
+			$.messager.alert("错误信息","请选择需要作废的取派员","warning");
+		}else{
+			$.messager.confirm("确定信息","确定作废吗？",function(r){
+				if(r){
+					//删除
+					var array = new Array();
+					//发送请求，确定
+					//获取所有取派员的id
+					for(var i = 0;i < rows.length;i++){
+						var staff = rows[i];//遍历出json对象
+						var id = staff.id;
+						array.push(id);
+					}
+					var ids = array.join(",");//1,2,3...
+					//alert(ids);
+					window.location.href="${pageContext.request.contextPath}/staffAction_deleteStaffs?ids = "+ids;
+				}
+			});
+		}
+		
 	}
 	
 	function doRestore(){
@@ -97,10 +121,10 @@
 		width : 120,
 		align : 'center',
 		formatter : function(data,row, index){
-			if(data=="0"){
-				return "正常使用"
-			}else{
-				return "已作废";
+			if(data=="0" || data == ""){
+				return "已作废"
+			}else if(data == "1"){
+				return "正常使用";
 			}
 		}
 	}, {

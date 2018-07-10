@@ -71,7 +71,6 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
 		//向客户端写出json
 		ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
 		ServletActionContext.getResponse().getWriter().print(json);
-		
 		return NONE;
 	}
 	
