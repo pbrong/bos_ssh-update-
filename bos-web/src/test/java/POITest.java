@@ -17,9 +17,9 @@ import org.junit.Test;
  */
 public class POITest {
 	
-	@Test
+	//@Test
 	public void fun1() throws FileNotFoundException, IOException{
-		String path = "D:\\C盘迁移\\Desktop\\编程日常\\区域导入测试数据.xls";
+		String path = "D:\\workspace_bos\\bos_parent\\bos-web\\target\\tomcat\\work\\Tomcat\\localhost\\bos\\upload_c2dee49d_d1a8_4ef1_9738_a9052c92c71c_00000002.tmp";
 		//包装一个 Excel文件
 		HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(new File(path)));
 		//读取文件中第一个sheet的内容

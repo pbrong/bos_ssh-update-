@@ -19,7 +19,7 @@ import com.iteason.utils.PageBean;
 /**
  * 
  * @author 阿荣
- * IBaseDao<T>接口的实现类
+ * BaseDao<T>接口的实现类
  * @param <T>
  */
 public class BaseDaoImp<T> extends HibernateDaoSupport implements BaseDao<T> {
@@ -103,7 +103,7 @@ public class BaseDaoImp<T> extends HibernateDaoSupport implements BaseDao<T> {
 	@Override
 	public void saveOrUpdate(T entity) {
 		//保存或更新
-		getHibernateTemplate().saveOrUpdate(entity);
+		this.getHibernateTemplate().saveOrUpdate(entity);
 		
 	}
 
