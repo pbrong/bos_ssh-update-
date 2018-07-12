@@ -99,4 +99,12 @@ public class BaseDaoImp<T> extends HibernateDaoSupport implements BaseDao<T> {
 		return pageBean;
 	}
 
+
+	@Override
+	public void saveOrUpdate(T entity) {
+		//保存或更新
+		getHibernateTemplate().saveOrUpdate(entity);
+		
+	}
+
 }
