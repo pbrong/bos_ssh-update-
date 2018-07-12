@@ -50,5 +50,11 @@
 				<param name="actionName">page_base_staff</param>
 			</result>
 		</action>
+		
+		<action name="regionAction_*" class="regionAction" method="{1}">
+			<result name="toRegion" type="redirectAction">
+				
+			</result>
+		</action>
 	</package>
 </struts>

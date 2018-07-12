@@ -26,6 +26,7 @@
 <script
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
 	type="text/javascript"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.ocupload-1.1.2.js"></script>
 <script type="text/javascript">
 	function doAdd(){
 		$('#addRegionWindow').window("open");
@@ -58,7 +59,7 @@
 	}, {
 		id : 'button-import',
 		text : '导入',
-		iconCls : 'icon-redo'
+		iconCls : 'icon-redo',
 	}];
 	// 定义列
 	var columns = [ [ {
@@ -100,6 +101,7 @@
 		// 先将body隐藏，再显示，不会出现页面刷新效果
 		$("body").css({visibility:"visible"});
 		
+		
 		// 收派标准数据表格
 		$('#grid').datagrid( {
 			iconCls : 'icon-forward',
@@ -115,7 +117,11 @@
 			columns : columns,
 			onDblClickRow : doDblClickRow
 		});
-		
+		//导入数据表格
+		$("#button-import").upload({
+			action:'${pageContext.request.contextPath}/regionAction_importXls.action',
+			name:'regionFile'
+		});
 		// 添加、修改区域窗口
 		$('#addRegionWindow').window({
 	        title: '添加修改区域',
