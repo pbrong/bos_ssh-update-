@@ -33,4 +33,16 @@ public class StaffServiceImp implements StaffService {
 		
 	}
 
+	@Override
+	public Staff findById(String id) {
+		// 通过id先查出来
+		return staffDao.findById(id);
+	}
+
+	@Override
+	public void update(Staff staff) {
+		// 修改staff
+		staffDao.update(staff);
+	}
+
 }

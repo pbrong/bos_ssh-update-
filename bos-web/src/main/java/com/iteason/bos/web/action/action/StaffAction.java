@@ -96,4 +96,26 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
 		return "toStaff";
 	}
 	
+	/**
+	 * 
+	 * @author 阿荣
+	 * @Description: 修改取派员信息
+	 * @date: 2018年7月12日 上午10:10:56
+	 * @return
+	 * @throws Exception
+	 */
+	public String editStaff() throws Exception {
+		//查询数据库，根据id查询原始数据
+		Staff getStaff = staffService.findById(staff.getId());
+		//使用页面提交的数据进行覆盖
+		getStaff.setName(staff.getName());
+		getStaff.setTelephone(staff.getTelephone());
+		getStaff.setStation(staff.getStation());
+		getStaff.setHaspda(staff.getHaspda());
+		getStaff.setStandard(staff.getStandard());
+		//修改取派员
+		staffService.update(getStaff);
+		return "toStaff";
+	}
+	
 }

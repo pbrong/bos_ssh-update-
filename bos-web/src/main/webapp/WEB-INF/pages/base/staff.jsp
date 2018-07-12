@@ -170,10 +170,27 @@
 	        resizable:false
 	    });
 		
+		//修改取派员窗口
+		$('#editStaffWindow').window({
+	        title: '修改取派员',
+	        width: 400,
+	        modal: true,
+	        shadow: true,
+	        closed: true,
+	        height: 400,
+	        resizable:false
+	    });
+		
 	});
 
 	function doDblClickRow(rowIndex, rowData){
-		alert("双击表格数据...");
+		//alert("双击表格数据...");
+		//打开窗口
+		$('#editStaffWindow').window("open");
+		//回显数据
+		$('#editStaffWindow').form("load",rowData);
+		
+		
 	}
 </script>	
 </head>
@@ -217,6 +234,91 @@
 									if(check){
 										//验证通过，提交表单
 										$("#staffForm").submit();
+									}else{
+										//验证不通过
+										return false;
+									}
+									
+								});
+								
+								//手机号校验的正则表达式
+								var reg = /^1[3|4|5|7|8|9][0-9]{9}$/;
+								//自定义扩展的校验规则
+								$.extend($.fn.validatebox.defaults.rules, {
+									//规则名
+								    telephoneCheck: {
+										validator: function(value,param){
+											return reg.test(value);
+										},
+										message: '手机号输入错误'
+								    }
+								});
+							});
+						
+						</script>
+						<input type="text" name="telephone"  class="easyui-validatebox" 
+							data-options="validType:'telephoneCheck'"
+						required="true"/></td>
+					
+						
+					</tr>
+					<tr>
+						<td>单位</td>
+						<td><input type="text" name="station" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+						<input type="checkbox" name="haspda" value="1" />
+						是否有PDA</td>
+					</tr>
+					<tr>
+						<td>取派标准</td>
+						<td>
+							<input type="text" name="standard" class="easyui-validatebox" required="true"/>  
+						</td>
+					</tr>
+					</table>
+			</form>
+			
+			
+		<div class="easyui-window" title="对收派员进行添加或者修改" id="editStaffWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
+			<div region="north" style="height:31px;overflow:hidden;" split="false" border="false" >
+		<div class="datagrid-toolbar">
+			<a id="edit" icon="icon-edit" href="#" class="easyui-linkbutton" plain="true" >修改</a>
+		</div>
+		</div>
+		<div region="center" style="overflow:auto;padding:5px;" border="false">
+			<!-- 修改取派员的表单 -->
+			<form id="editStaffForm" method="post" action="${pageContext.request.contextPath}/staffAction_editStaff.action">
+			<!-- form表单自行回显 -->
+			<input type="hidden" name="id" >
+				<table class="table-edit" width="80%" align="center">
+					<tr class="title">
+						<td colspan="2">收派员信息</td>
+					</tr>
+					<!-- TODO 这里完善收派员添加 table -->
+				<!-- 	<tr>
+						<td>取派员编号</td>
+						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
+					</tr> -->
+					<tr>
+						<td>姓名</td>
+						<td><input type="text" name="name" class="easyui-validatebox" required="true"/></td>
+					</tr>
+					<tr>
+						<td>手机</td>
+						
+						
+						<td>
+						<script type="text/javascript">
+							$(function(){
+								//为保存按钮绑定事件
+								$("#edit").click(function(){
+									var check = $("#editStaffForm").form("validate");
+									//alert(check);
+									if(check){
+										//验证通过，提交表单
+										$("#editStaffForm").submit();
 									}else{
 										//验证不通过
 										return false;
