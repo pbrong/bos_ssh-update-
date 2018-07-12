@@ -87,15 +87,6 @@
 	var columns = [ [ {
 		field : 'id',
 		checkbox : true,
-	}, {
-		field : 'showid',
-		title : '分拣编号',
-		width : 120,
-		align : 'center',
-		formatter : function(data,row ,index){
-			return row.id;
-		}
-	},{
 		field : 'province',
 		title : '省',
 		width : 120,
@@ -207,24 +198,36 @@
 		<div style="height:31px;overflow:hidden;" split="false" border="false" >
 			<div class="datagrid-toolbar">
 				<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >保存</a>
-			</div>
 		</div>
 		
+		
+		<script type="text/javascript">
+		$(function(){
+			$("#save").click(function(){
+				var isCheck = $("#subareaForm").form("validate");
+				//alert(isCheck);
+				if(isCheck){
+					$("#subareaForm").submit();
+				}else{
+					$.messager.alert("错误信息","请正确输入所有信息","error");
+				}
+				
+			});
+		});
+		</script>
 		<div style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="subareaForm" method="post" action="${pageContext.request.contextPath}/regionAction_saveRegion.action">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">分区信息</td>
 					</tr>
-					<tr>
-						<td>分拣编码</td>
-						<td><input type="text" name="id" class="easyui-validatebox" required="true"/></td>
-					</tr>
+					
+					
 					<tr>
 						<td>选择区域</td>
 						<td>
 							<input class="easyui-combobox" name="region.id"  
-    							data-options="valueField:'id',textField:'name',url:'json/standard.json'" />  
+    							data-options="valueField:'id',textField:'name',url:'${pageContext.request.contextPath}/regionAction_listajax.action'" />  
 						</td>
 					</tr>
 					<tr>

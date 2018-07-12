@@ -19,11 +19,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.iteason.domain.Region;
+import com.iteason.domain.Subarea;
 import com.iteason.service.RegionService;
 import com.iteason.utils.PageBean;
 import com.iteason.utils.PinYin4jUtils;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 
 /**
@@ -124,5 +128,26 @@ public class RegionAction {
 		System.out.println("-------------"+json);
 		return null;
 	}
+	
+		/**
+		 * 
+		 * @author 阿荣
+		 * @Description: 查询分区的数据的下拉框
+		 * @date: 2018年7月12日 下午7:46:50
+		 * @return
+		 * @throws IOException 
+		 */
+		public String listajax() throws IOException{
+			List<Region> list = regionService.findAll();
+			//配置json转换排除subareas避免死循环
+			JsonConfig config = new JsonConfig();
+			String[] exclude = {"subareas"};
+			config.setExcludes(exclude);
+			String json = JSONArray.fromObject(list).toString();
+			//向客户端写出json
+			ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
+			ServletActionContext.getResponse().getWriter().print(json);
+			return null;
+		}
 	
 }

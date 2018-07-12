@@ -20,6 +20,11 @@ public class Region implements java.io.Serializable {
 	private String citycode;
 	private Set subareas = new HashSet(0);
 
+	
+	//获得combobox的name
+	public String getName(){
+		return province + city + district;
+	}
 	// Constructors
 
 	/** default constructor */

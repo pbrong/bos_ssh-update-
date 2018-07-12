@@ -3,6 +3,7 @@ package com.iteason.service;
 import java.util.List;
 
 import com.iteason.domain.Region;
+import com.iteason.domain.Subarea;
 import com.iteason.utils.PageBean;
 
 /**
@@ -16,5 +17,8 @@ public interface RegionService {
 	public void saveBatch(List<Region> regionList);
 
 	public PageBean queryPage(PageBean pageBean);
+
+	public List<Region> findAll();
+
 	
 }
