@@ -184,7 +184,7 @@
 	});
 
 	function doDblClickRow(rowIndex, rowData){
-		//alert("双击表格数据...");
+		alert("双击表格数据...");
 		//打开窗口
 		$('#editStaffWindow').window("open");
 		//回显数据

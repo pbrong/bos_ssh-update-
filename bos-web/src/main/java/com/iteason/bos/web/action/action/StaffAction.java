@@ -70,8 +70,11 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
 		pageBean.setDc(dc);
 		
 		pageBean  = staffService.queryPage(pageBean);
+		//只转换指定项为json
+		JsonConfig config = new JsonConfig();
+		config.setExcludes(new String[]{"decidedzones"});
 		//将PageBean转化为json格式
-		String json = JSONObject.fromObject(pageBean).toString();
+		String json = JSONObject.fromObject(pageBean,config).toString();
 		//向客户端写出json
 		ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
 		ServletActionContext.getResponse().getWriter().print(json);
