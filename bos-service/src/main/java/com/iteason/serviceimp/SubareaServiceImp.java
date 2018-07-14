@@ -32,6 +32,12 @@ public class SubareaServiceImp implements SubareaService {
 		return pageBean;
 	}
 
+	@Override
+	public List<Subarea> findAll() {
+		// 查找所有subarea对象
+		return subareaDao.findAll(DetachedCriteria.forClass(Subarea.class));
+	}
+
 
 
 }
