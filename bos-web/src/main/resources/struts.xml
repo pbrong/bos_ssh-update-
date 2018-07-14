@@ -56,5 +56,9 @@
 				
 			</result>
 		</action>
+		
+		<action name="subareaAction_*" class="subareaAction" method="{1}">
+			<result name="toSubarea"></result>
+		</action>
 	</package>
 </struts>

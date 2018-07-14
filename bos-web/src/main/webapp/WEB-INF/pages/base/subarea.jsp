@@ -44,7 +44,8 @@
 	}
 	
 	function doExport(){
-		alert("导出");
+		//alert("导出");
+		window.location.href="${pageContext.request.contextPath}/subareaAction_exportXls.action";
 	}
 	
 	function doImport(){
@@ -84,24 +85,32 @@
 		handler : doExport
 	}];
 	// 定义列
-	var columns = [ [ {
-		field : 'id',
-		checkbox : true,
+	var columns = [ [ 
+	    {
+	    	field : 'id',
+			checkbox : true,
+	    },
+	    {
 		field : 'province',
 		title : '省',
 		width : 120,
 		align : 'center',
 		formatter : function(data,row ,index){
 			return row.region.province;
+		},
+		styler: function(data,row,index){
+			if (row.region.province != null){
+				return 'background-color:pink;color:black;';
+			}
 		}
 	}, {
 		field : 'city',
 		title : '市',
 		width : 120,
 		align : 'center',
-		formatter : function(data,row ,index){
+	    formatter : function(data,row ,index){
 			return row.region.city;
-		}
+		} 
 	}, {
 		field : 'district',
 		title : '区',
@@ -151,7 +160,7 @@
 			pageList: [30,50,100],
 			pagination : true,
 			toolbar : toolbar,
-			url : "json/subarea.json",
+			url : "${pageContext.request.contextPath}/subareaAction_queryPage.action",
 			idField : 'id',
 			columns : columns,
 			onDblClickRow : doDblClickRow
@@ -178,15 +187,44 @@
 	        height: 400,
 	        resizable:false
 	    });
-		$("#btn").click(function(){
-			alert("执行查询...");
-		});
 		
 	});
-
 	function doDblClickRow(){
 		alert("双击表格数据...");
 	}
+	
+	$(function(){
+		$("#save").click(function(){
+			var isCheck = $("#subareaForm").form("validate");
+			//alert(isCheck);
+			if(isCheck){
+				$("#subareaForm").submit();
+			}else{
+				$.messager.alert("错误信息","请正确输入所有信息","error");
+			}
+			
+		});
+	});
+	
+	$.fn.serializeJson=function(){  
+        var serializeObj={};  
+        var array=this.serializeArray();
+        $(array).each(function(){  
+            if(serializeObj[this.name]){  
+                if($.isArray(serializeObj[this.name])){  
+                    serializeObj[this.name].push(this.value);  
+                }else{  
+                    serializeObj[this.name]=[serializeObj[this.name],this.value];  
+                }  
+            }else{  
+                serializeObj[this.name]=this.value;   
+            }  
+        });  
+        return serializeObj;  
+    }; 
+    
+    
+    
 </script>	
 </head>
 <body class="easyui-layout" style="visibility:hidden;">
@@ -198,25 +236,12 @@
 		<div style="height:31px;overflow:hidden;" split="false" border="false" >
 			<div class="datagrid-toolbar">
 				<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >保存</a>
+			</div>
 		</div>
 		
 		
-		<script type="text/javascript">
-		$(function(){
-			$("#save").click(function(){
-				var isCheck = $("#subareaForm").form("validate");
-				//alert(isCheck);
-				if(isCheck){
-					$("#subareaForm").submit();
-				}else{
-					$.messager.alert("错误信息","请正确输入所有信息","error");
-				}
-				
-			});
-		});
-		</script>
 		<div style="overflow:auto;padding:5px;" border="false">
-			<form id="subareaForm" method="post" action="${pageContext.request.contextPath}/regionAction_saveRegion.action">
+			<form id="subareaForm" method="post" action="${pageContext.request.contextPath}/subareaAction_saveSubarea.action">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">分区信息</td>
@@ -229,14 +254,14 @@
 							<input class="easyui-combobox" name="region.id"  
     							data-options="valueField:'id',textField:'name',url:'${pageContext.request.contextPath}/regionAction_listajax.action'" />  
 						</td>
-					</tr>
+					</tr> 
 					<tr>
 						<td>关键字</td>
 						<td><input type="text" name="addresskey" class="easyui-validatebox" required="true"/></td>
 					</tr>
 					<tr>
 						<td>起始号</td>
-						<td><input type="text" name="startnum" class="easyui-validatebox" required="true"/></td>
+						<td><input type="text" name="startnum" /></td>
 					</tr>
 					<tr>
 						<td>终止号</td>
@@ -260,10 +285,26 @@
 			</form>
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+	$(function(){
+		$("#btn").click(function(){
+			//将指定的form表单转换为json数据
+			var formJson = $("#searchForm").serializeJson();
+			console.info(formJson);
+			//调用数据表格的load方法，重新发送一次ajax请求并提交参数，但不刷新页面
+			$("#grid").datagrid("load",formJson);
+			//关闭窗口
+			$("#searchWindow").window("close");
+		});
+		
+	});
+		
+	</script>
 	<!-- 查询分区 -->
 	<div class="easyui-window" title="查询分区窗口" id="searchWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
 		<div style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form id="searchForm">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">查询条件</td>

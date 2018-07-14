@@ -1,5 +1,8 @@
 package com.iteason.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 分区
  */
@@ -19,6 +22,16 @@ public class Subarea implements java.io.Serializable {
 
 	// Constructors
 
+	/*public List getRows(){
+		List rows = new ArrayList<String>();
+		rows.add(region.getProvince());
+		rows.add(region.getCity());
+		rows.add(region.getDistrict());
+		
+		return rows;
+	}
+	*/
+	
 	/** default constructor */
 	public Subarea() {
 	}

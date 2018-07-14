@@ -90,11 +90,12 @@ public class BaseDaoImp<T> extends HibernateDaoSupport implements BaseDao<T> {
 		//查询分页数据
 			//清空查询数量的语句
 		dc.setProjection(null);
+		//指定hibernate框架封装对象的方式
+			dc.setResultTransformer(DetachedCriteria.ROOT_ENTITY);
 		int firstResult = (pageBean.getCurrentPage()-1)*pageSize;
 		int maxResult = pageSize;
 		List<T> rows = (List<T>) getHibernateTemplate().findByCriteria(dc,firstResult,maxResult);
 		pageBean.setRows(rows);
-		
 		//返回封装好的PageBean
 		return pageBean;
 	}

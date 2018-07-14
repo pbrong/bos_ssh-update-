@@ -25,5 +25,13 @@ public class SubareaServiceImp implements SubareaService {
 		subareaDao.save(subarea);
 	}
 
+	@Override
+	public PageBean queryPage(PageBean pageBean) {
+		// 分区模糊查询
+		pageBean = subareaDao.pageQuery(pageBean);
+		return pageBean;
+	}
+
+
 
 }

@@ -1,0 +1,9 @@
+
+	{
+		"rows":
+			[
+				{"addresskey":"11","endnum":"1","id":"402881346491a4fb016491a68d670000","position":"1","region":{"city":"北京市","citycode":"beijing","district":"西城区","id":"QY002","name":"北京市北京市西城区","postcode":"110102","province":"北京市","shortcode":"BJBJXC"},"single":"0","startnum":"111"},
+				{"addresskey":"东城区","endnum":"12","id":"40288134649237af0164925ba0b70000","position":"东城区","region":{"city":"北京市","citycode":"beijing","district":"东城区","id":"QY001","name":"北京市北京市东城区","postcode":"110101","province":"北京市","shortcode":"BJBJDC"},"single":"0","startnum":"11"}
+			],
+		"total":2
+	}

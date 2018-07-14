@@ -16,6 +16,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iteason.domain.Region;
@@ -37,6 +38,7 @@ import net.sf.json.JsonConfig;
  * @date: 2018年7月12日 下午1:30:00
  */
 @Controller
+@Scope("prototype")
 public class RegionAction {
 	@Autowired
 	private RegionService regionService;
@@ -120,8 +122,12 @@ public class RegionAction {
 		pageBean.setDc(dc);
 		
 		pageBean  = regionService.queryPage(pageBean);
+		//排除subareas转换json，避免死循环
+		JsonConfig config = new JsonConfig();
+		String[] exclude = {"subareas"};
+		config.setExcludes(exclude);
 		//将PageBean转化为json格式
-		String json = JSONObject.fromObject(pageBean).toString();
+		String json = JSONObject.fromObject(pageBean,config).toString();
 		//向客户端写出json
 		ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
 		ServletActionContext.getResponse().getWriter().print(json);
@@ -143,7 +149,7 @@ public class RegionAction {
 			JsonConfig config = new JsonConfig();
 			String[] exclude = {"subareas"};
 			config.setExcludes(exclude);
-			String json = JSONArray.fromObject(list).toString();
+			String json = JSONArray.fromObject(list,config).toString();
 			//向客户端写出json
 			ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
 			ServletActionContext.getResponse().getWriter().print(json);

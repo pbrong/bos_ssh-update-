@@ -6,6 +6,7 @@ import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iteason.domain.Staff;
@@ -18,6 +19,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 @Controller
+@Scope("prototype")
 public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
 	private Staff staff = new Staff();
 	@Override
