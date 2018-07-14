@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +37,14 @@ public class SubareaServiceImp implements SubareaService {
 	public List<Subarea> findAll() {
 		// 查找所有subarea对象
 		return subareaDao.findAll(DetachedCriteria.forClass(Subarea.class));
+	}
+
+	@Override
+	public List<Subarea> findListNotAssociation() {
+		// 查询未关联的分区
+		DetachedCriteria dc = DetachedCriteria.forClass(Subarea.class);
+		dc.add(Restrictions.isNull("decidedzone.id"));
+		return subareaDao.findByCriteria(dc);
 	}
 
 

@@ -53,12 +53,23 @@
 		
 		<action name="regionAction_*" class="regionAction" method="{1}">
 			<result name="toRegion" type="redirectAction">
-				
+					<param name="namespace">/</param>
+					<param name="actionName">page_base_region</param>
 			</result>
 		</action>
 		
 		<action name="subareaAction_*" class="subareaAction" method="{1}">
-			<result name="toSubarea"></result>
+			<result name="toSubarea" type="redirectAction">
+					<param name="namespace">/</param>
+					<param name="actionName">page_base_subarea</param>
+			</result>
+		</action>
+		
+		<action name="decidedzoneAction_*" class="decidedzoneAction" method="{1}">
+			<result name="toDecidedzone" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">page_base_decidedzone</param>
+			</result>
 		</action>
 	</package>
 </struts>

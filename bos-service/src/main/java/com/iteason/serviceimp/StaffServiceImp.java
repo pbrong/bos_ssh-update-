@@ -1,5 +1,9 @@
 package com.iteason.serviceimp;
 
+import java.util.List;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +47,14 @@ public class StaffServiceImp implements StaffService {
 	public void update(Staff staff) {
 		// 修改staff
 		staffDao.update(staff);
+	}
+
+	@Override
+	public List<Staff> findListNotDelete() {
+		// 查找所有未作废的staff
+		DetachedCriteria dc = DetachedCriteria.forClass(Staff.class);
+		dc.add(Restrictions.eq("deltag", "1"));
+		return staffDao.findByCriteria(dc);
 	}
 
 }

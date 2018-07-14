@@ -23,4 +23,5 @@ public interface BaseDao<T> {
       public T findById(Serializable id);
       public List<T> findAll(DetachedCriteria c);
       public PageBean pageQuery(PageBean pageBean);
+      public List<T> findByCriteria(DetachedCriteria dc);
 }

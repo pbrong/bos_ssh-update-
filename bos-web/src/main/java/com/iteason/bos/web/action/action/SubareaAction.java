@@ -123,7 +123,6 @@ public class SubareaAction extends ActionSupport implements ModelDriven<Subarea>
 				ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
 				ServletActionContext.getResponse().getWriter().print(json);
 				System.out.println("-------------"+json);
-				System.out.println("-------------"+subarea);
 				return null;
 	}
 		
@@ -172,6 +171,25 @@ public class SubareaAction extends ActionSupport implements ModelDriven<Subarea>
 		filename = FileUtils.encodeDownloadFilename(filename, agent);
 		ServletActionContext.getResponse().setHeader("content-disposition", "attachment;filename="+filename);
 		workbook.write(out);
+		return NONE;
+	}
+	/**
+	 * 
+	 * @author 阿荣
+	 * @Description: 查询未关联的分区
+	 * @date: 2018年7月14日 下午3:27:36
+	 * @return
+	 * @throws IOException 
+	 */
+	public String listajax() throws IOException{
+		List<Subarea> list = subareaService.findListNotAssociation();
+		JsonConfig jsonConfig = new JsonConfig();
+		String[] excludes = {"decidedzone","region"};
+		jsonConfig.setExcludes(excludes);
+		String json = JSONArray.fromObject(list,jsonConfig).toString();
+		//json数据回显
+		ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
+		ServletActionContext.getResponse().getWriter().print(json);
 		return NONE;
 	}
 }

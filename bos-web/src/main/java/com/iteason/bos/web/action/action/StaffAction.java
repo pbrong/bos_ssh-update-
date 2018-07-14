@@ -1,6 +1,7 @@
 package com.iteason.bos.web.action.action;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
@@ -18,6 +19,7 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 @Controller
 @Scope("prototype")
 public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
@@ -120,4 +122,22 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
 		return "toStaff";
 	}
 	
+	/**
+	 * 
+	 * @author 阿荣
+	 * @Description: 查询所有的取派员信息并返回json
+	 * @date: 2018年7月14日 下午2:46:55
+	 * @return
+	 * @throws IOException 
+	 */
+	public String listajax() throws IOException{
+		List<Staff> list = staffService.findListNotDelete();
+		JsonConfig config = new JsonConfig();
+		config.setExcludes(new String[]{"decidedzones"});
+		String json = JSONArray.fromObject(list,config).toString();
+		//json数据回显
+		ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
+		ServletActionContext.getResponse().getWriter().print(json);
+		return NONE;
+	}
 }

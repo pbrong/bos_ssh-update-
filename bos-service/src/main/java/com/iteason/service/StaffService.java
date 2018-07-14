@@ -1,5 +1,7 @@
 package com.iteason.service;
 
+import java.util.List;
+
 import com.iteason.domain.Staff;
 import com.iteason.utils.PageBean;
 
@@ -14,4 +16,6 @@ public interface StaffService {
 	public Staff findById(String id);
 
 	public void update(Staff staff);
+
+	public List<Staff> findListNotDelete();
 }

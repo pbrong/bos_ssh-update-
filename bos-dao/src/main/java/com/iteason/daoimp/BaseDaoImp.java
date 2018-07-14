@@ -108,4 +108,12 @@ public class BaseDaoImp<T> extends HibernateDaoSupport implements BaseDao<T> {
 		
 	}
 
+
+	@Override
+	public List<T> findByCriteria(DetachedCriteria dc) {
+		// 通过de封装查询条件返回List对象
+		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(dc);
+		return list;
+	}
+
 }
