@@ -203,8 +203,8 @@
 	function doDblClickRow(rowIndex, rowData){
 		//alert("双击表格数据...");
 		$("#editSubareaWindow").window("open");
-		var com = $("#combobox").combobox("getData");
-		alert(com);
+		/* var com = $("#combobox").combobox("getData");
+		alert(com); */
 		$("#editsubareaForm").form("load",rowData);
 	}
 	
