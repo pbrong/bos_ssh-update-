@@ -91,14 +91,6 @@ public class DecidedzoneAction extends ActionSupport implements ModelDriven<Deci
 		 * @return
 		 * @throws IOException 
 		 */
-		//decidedzone.jsp页面传来的定区的id
-		private String id;
-		public void setId(String id) {
-			this.id = id;
-		}
-		public String getId(){
-			return this.id;
-		}
 		public String findListNotAssociation() throws IOException{
 			List<Customer> list = proxy.findListNotAssociation();
 			//转换成json格式
@@ -110,7 +102,7 @@ public class DecidedzoneAction extends ActionSupport implements ModelDriven<Deci
 		
 		
 		public String findListHasAssociation() throws IOException{
-			List<Customer> list = proxy.findListHasAssociation(id);
+			List<Customer> list = proxy.findListHasAssociation(decidezone.getId());
 			//转换成json格式
 			String json = JSONArray.fromObject(list).toString();
 			ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
@@ -118,19 +110,25 @@ public class DecidedzoneAction extends ActionSupport implements ModelDriven<Deci
 			return null;
 		}
 		
+		//属性驱动，接受前台传来的被选中的客户id列表
+		private List<Integer> customerIds;
+		public List<Integer> getCustomerIds() {
+			return customerIds;
+		}
+		public void setCustomerIds(List<Integer> customerIds) {
+			this.customerIds = customerIds;
+		}
 		/**
 		 * 
 		 * @author 阿荣
-		 * @Description: 
+		 * @Description: 定区关联后的保存
 		 * @date: 2018年7月16日 下午1:45:20
 		 * @return
 		 * @throws Exception
 		 */
 		public String assigncustomerstodecidedzone() throws Exception {
-			 
-			
-			
-			return null;
+			 proxy.assigncustomerstodecidedzone(decidezone.getId(),customerIds);
+			 return "toDecidedzone";
 		}
 		
 		
