@@ -199,7 +199,7 @@
 		        <version>2.2</version>
 		        <configuration>
 	        	  <path>/bos</path>
-				  <port>8080</port>
+				  <port>8081</port>
 		          <!-- <url>http://localhost:8080/manager/text</url>
 		          <server>admin</server>
 		          <username>tomcat</username>
