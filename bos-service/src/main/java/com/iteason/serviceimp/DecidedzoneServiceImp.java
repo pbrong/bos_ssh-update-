@@ -9,6 +9,7 @@ import com.iteason.dao.SubareaDao;
 import com.iteason.domain.Decidedzone;
 import com.iteason.domain.Subarea;
 import com.iteason.service.DecidedzoneService;
+import com.iteason.utils.PageBean;
 @Service
 @Transactional
 public class DecidedzoneServiceImp implements DecidedzoneService {
@@ -30,6 +31,15 @@ public class DecidedzoneServiceImp implements DecidedzoneService {
 			subarea.setDecidedzone(decidezone);
 		}
 
+	}
+	/**
+	 * 查询定区
+	 */
+	@Override
+	public void pageQuery(PageBean pageBean) {
+		// 
+		 pageBean = decidedzoneDao.pageQuery(pageBean);
+		
 	}
 
 }

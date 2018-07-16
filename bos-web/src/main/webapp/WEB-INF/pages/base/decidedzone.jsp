@@ -44,7 +44,23 @@
 	}
 	
 	function doAssociations(){
-		$('#customerWindow').window('open');
+		/////////////////
+		var rows = $("#grid").datagrid("getSelected");
+		//alert(rows.staff.name);
+		if(rows == null){
+			$.messager.alert("错误信息","请选择需要关联的负责人","error");
+		}else{
+			//选中了一个定区
+			$('#customerWindow').window('open');
+			//发送ajax请求，请求定区Action，在定区Action中通过crm代理对象完成对crm服务远程调用客户数据
+			$.post(
+				"${pageContext.request.contextPath}/decidedzoneAction_findListNotAssociation.action",
+				function(data){
+					alert(data);
+				}
+			);
+		}
+		
 	}
 	
 	//工具栏
