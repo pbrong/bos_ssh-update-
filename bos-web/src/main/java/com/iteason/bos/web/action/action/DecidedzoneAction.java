@@ -91,12 +91,47 @@ public class DecidedzoneAction extends ActionSupport implements ModelDriven<Deci
 		 * @return
 		 * @throws IOException 
 		 */
+		//decidedzone.jsp页面传来的定区的id
+		private String id;
+		public void setId(String id) {
+			this.id = id;
+		}
+		public String getId(){
+			return this.id;
+		}
 		public String findListNotAssociation() throws IOException{
 			List<Customer> list = proxy.findListNotAssociation();
 			//转换成json格式
 			String json = JSONArray.fromObject(list).toString();
-			ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
+			ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
 			ServletActionContext.getResponse().getWriter().println(json);
 			return null;
 		}
+		
+		
+		public String findListHasAssociation() throws IOException{
+			List<Customer> list = proxy.findListHasAssociation(id);
+			//转换成json格式
+			String json = JSONArray.fromObject(list).toString();
+			ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
+			ServletActionContext.getResponse().getWriter().println(json);
+			return null;
+		}
+		
+		/**
+		 * 
+		 * @author 阿荣
+		 * @Description: 
+		 * @date: 2018年7月16日 下午1:45:20
+		 * @return
+		 * @throws Exception
+		 */
+		public String assigncustomerstodecidedzone() throws Exception {
+			 
+			
+			
+			return null;
+		}
+		
+		
 }
