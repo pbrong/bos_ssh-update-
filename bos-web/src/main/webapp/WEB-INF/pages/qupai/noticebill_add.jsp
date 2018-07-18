@@ -52,7 +52,7 @@
 	</div>
 	<div region="center" style="overflow:auto;padding:5px;" border="false">
 		<form id="noticebillForm" action="" method="post">
-			<table class="table-edit" width="95%" align="center">
+			<table class="table-edit" width="100%" align="center">
 				<tr class="title">
 					<td colspan="4">客户信息</td>
 				</tr>
@@ -61,7 +61,7 @@
 					<td><input type="text" class="easyui-validatebox" name="telephone"
 						required="true" /></td>
 					<td>客户编号:</td>
-					<td><input type="text" class="easyui-validatebox"  name="customerId"
+					<td style="margin-left:0px"><input  type="text" class="easyui-validatebox"  name="customerId"
 						required="true" /></td>
 				</tr>
 				<tr>
