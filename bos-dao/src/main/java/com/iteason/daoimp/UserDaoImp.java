@@ -30,5 +30,31 @@ public class UserDaoImp extends BaseDaoImp<User> implements UserDao {
 		User user = getHibernateTemplate().get(User.class, id);
 		user.setPassword(password);
 		getHibernateTemplate().update(user);
+	}
+	@Override
+	public void save(User entity) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void delete(User entity) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void update(User entity) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public User findUserByUsername(String username) {
+		// 通过用户名查询用户是否存在
+		String hql = "from User where username  = ?";
+		List<User> list = (List<User>) getHibernateTemplate().find(hql,username);
+		if(list.size() > 0){
+			return list.get(0);
+		}else{
+			return null;
+		}
 	};
 }

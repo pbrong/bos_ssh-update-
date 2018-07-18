@@ -7,6 +7,10 @@ import java.util.List;
 
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,6 +23,8 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+
+import freemarker.template.utility.SecurityUtilities;
 
 
 @Controller
@@ -74,18 +80,21 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		//校验验证码是否输入正确
 		if(StringUtils.isNotBlank(checkcode) && checkcode.equals(validatecode)){
 			//输入的验证码正确
-			User checkUser = userService.login(user);
-			if(checkUser != null){
-				System.out.println(checkUser.getId()+"'............................id");
-				//登录成功,将user对象放入session，跳转到首页
-				ServletActionContext.getRequest().getSession().setAttribute("loginUser", checkUser);
-				return "home";
-			}else{
-				//登录失败，,设置提示信息，跳转到登录页面
-				//输入的验证码错误,设置提示信息，跳转到登录页面
-				this.addActionError("用户名或者密码输入错误！");
+			//使用shiro框架提供的方式进行认证授权
+			Subject subject = SecurityUtils.getSubject();//获得当前用户
+			AuthenticationToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());//创建用户名密码令牌对象
+			try{
+				subject.login(token);//调用login
+			}catch(Exception e){
+				this.addActionError("输入的账号或密码错误！");
+				e.printStackTrace();
 				return LOGIN;
 			}
+			//没有异常，验证正确，将查询到的user存入session
+			//通过subject对象获得绑定在线程上的user
+			User getUser = (User) subject.getPrincipal();
+			ServletActionContext.getRequest().getSession().setAttribute("user", getUser);
+			return "home";
 		}else{
 			//输入的验证码错误,设置提示信息，跳转到登录页面
 			this.addActionError("输入的验证码错误！");

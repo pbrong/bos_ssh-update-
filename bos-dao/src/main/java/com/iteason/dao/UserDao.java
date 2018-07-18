@@ -13,5 +13,7 @@ public interface UserDao extends BaseDao<User>{
 
 	void editPassword(String id, String password);
 
+	User findUserByUsername(String username);
+
 
 }
