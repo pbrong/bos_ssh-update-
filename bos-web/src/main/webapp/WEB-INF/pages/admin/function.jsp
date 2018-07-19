@@ -39,7 +39,7 @@
 					}
 				}           
 			],
-			url : '',
+			url : '${pageContext.request.contextPath}/functionAction_pageQuery.action',
 			columns : [[
 			  {
 				  field : 'id',
@@ -71,7 +71,10 @@
 				  title : '路径',
 				  width : 200
 			  }
-			]]
+			]],
+			pageList:[10,30,50],
+			pagination:true,
+			fit:true
 		});
 	});
 </script>	

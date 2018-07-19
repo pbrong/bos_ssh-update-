@@ -4,16 +4,19 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.iteason.domain.Function;
 import com.iteason.service.FunctionService;
+import com.iteason.utils.PageBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
 @Controller
@@ -65,4 +68,40 @@ public class FunctionAction extends ActionSupport implements ModelDriven<Functio
 		functionService.save(function);
 		return "toFunction";
 	}
+	
+	private int rows;//页容量
+	public int getRows() {
+		return rows;
+	}
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+	/**
+	 * 
+	 * @author 阿荣
+	 * @Description:权限的分页查询
+	 * @date: 2018年7月19日 下午4:24:43
+	 * @return
+	 * @throws IOException 
+	 */
+	public String pageQuery() throws IOException{
+		PageBean pageBean = new PageBean();
+		String page = function.getPage();
+		pageBean.setCurrentPage(Integer.parseInt(page));
+		pageBean.setPageSize(rows);
+		DetachedCriteria dc = DetachedCriteria.forClass(Function.class);
+		pageBean.setDc(dc);
+		functionService.pageQuery(pageBean);
+		//json配置排除
+		JsonConfig config = new JsonConfig();
+		config.setExcludes(new String[]{"parentFunction","roles","children"});
+		//转json
+		String json = JSONObject.fromObject(pageBean,config).toString();
+		//输出到前台
+		ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
+		ServletActionContext.getResponse().getWriter().print(json);
+		return NONE;
+	}
+	
+	
 }
