@@ -79,9 +79,9 @@
 		</action>
 		
 		<action name="functionAction_*" class="functionAction" method="{1}">
-			<result name="toDecidedzone" type="redirectAction">
+			<result name="toFunction">
 				<param name="namespace">/</param>
-				<param name="actionName">page_base_decidedzone</param>
+				<param name="actionName">page_admin_function</param>
 			</result>
 		</action>
 	</package>

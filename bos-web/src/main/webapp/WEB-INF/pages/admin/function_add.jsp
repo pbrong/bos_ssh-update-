@@ -61,7 +61,7 @@
 					<tr>
 						<td width="200">关键字</td>
 						<td>
-							<input type="text" name="keyword" class="easyui-validatebox" data-options="required:true" />						
+							<input type="text" name="code" class="easyui-validatebox" data-options="required:true" />						
 						</td>
 					</tr>
 					<tr>

@@ -24,5 +24,10 @@ public class FunctionServiceImp implements FunctionService {
 		List<Function> list = functionDao.findByCriteria(dc);
 		return list;
 	}
+	@Override
+	public void save(Function function) {
+		// 保存Function
+		functionDao.save(function);
+	}
 
 }

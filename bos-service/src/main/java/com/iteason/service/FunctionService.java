@@ -8,4 +8,6 @@ public interface FunctionService {
 
 	List<Function> findAll();
 
+	void save(Function function);
+
 }

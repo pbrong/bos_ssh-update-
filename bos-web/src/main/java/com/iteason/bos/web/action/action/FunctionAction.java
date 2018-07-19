@@ -54,4 +54,15 @@ public class FunctionAction extends ActionSupport implements ModelDriven<Functio
 		ServletActionContext.getResponse().getWriter().print(json);
 		return null;
 	}
+	/**
+	 * 
+	 * @author 阿荣
+	 * @Description:添加权限
+	 * @date: 2018年7月19日 下午4:13:40
+	 * @return
+	 */
+	public String add(){
+		functionService.save(function);
+		return "toFunction";
+	}
 }
