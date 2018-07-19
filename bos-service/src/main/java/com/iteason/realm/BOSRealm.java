@@ -6,6 +6,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,11 @@ import com.iteason.domain.User;
 public class BOSRealm extends AuthorizingRealm{
 	@Autowired
 	private UserDao userDao;
+	
 	/**
-	 * 认证方法
+	 *认证方法
 	 */
-	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection token) {
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		System.out.println("认证方法已经执行");
 		//根据用户名查询数据库中的密码，框架负责比对数据库中的密码和页面输入的密码是否一致
 		UsernamePasswordToken tk = (UsernamePasswordToken) token;
@@ -39,14 +41,18 @@ public class BOSRealm extends AuthorizingRealm{
 		//简单认证信息对象
 		AuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), this.getName());
 		//框架负责比对数据库中的密码和页面输入的密码是否一致
-		return (AuthorizationInfo) info;
-		
+		return info;
 	}
+	
 	/**
 	 * 授权方法
 	 */
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
-		return null;
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection args){
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		//添加授权口令
+		//TODO 后期查询数据库
+		info.addStringPermission("staff-list");
+		return info;
 	}
 
 }

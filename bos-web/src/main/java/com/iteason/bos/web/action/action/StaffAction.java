@@ -3,6 +3,7 @@ package com.iteason.bos.web.action.action;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.junit.Test;
@@ -93,6 +94,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
 	 * @date: 2018年7月10日 下午3:54:01
 	 * @return
 	 */
+	@RequiresPermissions("staff-delete")
 	public String deleteStaffs(){
 		//System.out.println(ids);
 		String[] idArray = ids.split(",");

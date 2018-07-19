@@ -9,23 +9,23 @@
 	 -->
 	<package name="basicstruts2" extends="struts-default">
 	<!-- 自定义拦截器 -->
-	<interceptors>
-	<!-- 注册自定义的拦截器 -->
+	<!-- <interceptors>
+	注册自定义的拦截器
 		<interceptor name="myInt" class="com.iteason.bos.web.interceptor.MyInterceptor"></interceptor>
-		<!-- 注册自定义拦截器栈 -->
+		注册自定义拦截器栈
 		<interceptor-stack name="myStack">
 			<interceptor-ref name="myInt">
-				<!-- 配置不拦截的方法 -->
+				配置不拦截的方法
 				<param name="excludeMethods">login</param>
 			</interceptor-ref>
-				<!-- 默认拦截器栈 -->
+				默认拦截器栈
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</interceptor-stack>
 	</interceptors>
 	
-	<!-- 指定默认拦截器栈 -->
+	指定默认拦截器栈
 	<default-interceptor-ref name="myStack"></default-interceptor-ref>
-	
+	 -->
 	
 	
 	

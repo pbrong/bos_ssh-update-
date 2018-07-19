@@ -79,9 +79,10 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		String validatecode = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
 		//校验验证码是否输入正确
 		if(StringUtils.isNotBlank(checkcode) && checkcode.equals(validatecode)){
+			System.out.println(user.getPassword()+user.getUsername());
 			//输入的验证码正确
 			//使用shiro框架提供的方式进行认证授权
-			Subject subject = SecurityUtils.getSubject();//获得当前用户
+			Subject subject = SecurityUtils.getSubject();//获得当前用户,状态为未认证
 			AuthenticationToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());//创建用户名密码令牌对象
 			try{
 				subject.login(token);//调用login
@@ -93,7 +94,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 			//没有异常，验证正确，将查询到的user存入session
 			//通过subject对象获得绑定在线程上的user
 			User getUser = (User) subject.getPrincipal();
-			ServletActionContext.getRequest().getSession().setAttribute("user", getUser);
+			ServletActionContext.getRequest().getSession().setAttribute("loginUser", getUser);
 			return "home";
 		}else{
 			//输入的验证码错误,设置提示信息，跳转到登录页面
