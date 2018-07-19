@@ -32,7 +32,13 @@
 	<!-- 全局结果集 -->
 	<global-results>
 		<result name="toLogin">/login.jsp</result>
+		<result name="unauthorized">/unauthorized.jsp</result>
 	</global-results>
+	
+	<!-- 全局异常结果集 -->
+	<global-exception-mappings>
+		<exception-mapping result="unauthorized" exception="org.apache.shiro.authz.UnauthorizedException"></exception-mapping>
+	</global-exception-mappings>
 	
 		<!-- 需要进行权限控制的页面访问 -->
 		<action name="page_*_*">
@@ -66,6 +72,13 @@
 		</action>
 		
 		<action name="decidedzoneAction_*" class="decidedzoneAction" method="{1}">
+			<result name="toDecidedzone" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">page_base_decidedzone</param>
+			</result>
+		</action>
+		
+		<action name="functionAction_*" class="functionAction" method="{1}">
 			<result name="toDecidedzone" type="redirectAction">
 				<param name="namespace">/</param>
 				<param name="actionName">page_base_decidedzone</param>

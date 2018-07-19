@@ -27,12 +27,6 @@
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
 	type="text/javascript"></script>
 <script type="text/javascript">
-	$(function(){
-		// 点击保存
-		$('#save').click(function(){
-			location.href='${pageContext.request.contextPath}/page_admin_function.action';
-		});
-	});
 </script>	
 </head>
 <body class="easyui-layout">
@@ -41,6 +35,23 @@
 		<a id="save" icon="icon-save" href="#" class="easyui-linkbutton" plain="true" >保存</a>
 	</div>
 </div>
+<script type="text/javascript">
+	$(function(){
+		$("#save").click(function(){
+			var v = $("#functionForm").form("validate");
+			if(v){
+				 $("#functionForm").subimt();
+			}else{
+				$.messager.alert("错误信息","请检查填写项","error");
+				
+			}
+			
+			
+		})
+		
+	})
+	
+</script>
 <div data-options="region:'center'">
 	<form id="functionForm" method="post">
 				<table class="table-edit" width="80%" align="center">
@@ -48,9 +59,9 @@
 						<td colspan="2">功能权限信息</td>
 					</tr>
 					<tr>
-						<td width="200">编号</td>
+						<td width="200">关键字</td>
 						<td>
-							<input type="text" name="id" class="easyui-validatebox" data-options="required:true" />						
+							<input type="text" name="keyword" class="easyui-validatebox" data-options="required:true" />						
 						</td>
 					</tr>
 					<tr>
@@ -64,7 +75,7 @@
 					<tr>
 						<td>是否生成菜单</td>
 						<td>
-							<select name="generateMenu" class="easyui-combobox">
+							<select name="generatemenu" class="easyui-combobox">
 								<option value="0">不生成</option>
 								<option value="1">生成</option>
 							</select>
@@ -79,7 +90,7 @@
 					<tr>
 						<td>父功能点</td>
 						<td>
-							<input name="parentFunction.id" class="easyui-combobox" data-options="valueField:'id',textField:'info',url:''"/>
+							<input name="parentFunction.id" class="easyui-combobox" data-options="valueField:'id',textField:'name',url:'functionAction_listajax.action'"/>
 						</td>
 					</tr>
 					<tr>

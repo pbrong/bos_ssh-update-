@@ -23,5 +23,14 @@
         </property>
         <property name="remark" >
         </property>
+        
+        <set name="roles" table="user_role" >
+            <key>
+                <column name="user_id" length="32" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.iteason.domain.Role">
+                <column name="role_id" length="32" not-null="true" />
+            </many-to-many>
+        </set>
     </class>
 </hibernate-mapping>
