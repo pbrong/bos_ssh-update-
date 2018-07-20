@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
 
+import com.iteason.domain.Role;
 import com.iteason.utils.PageBean;
 
 import net.sf.ehcache.search.expression.Criteria;
@@ -21,7 +22,6 @@ public interface BaseDao<T> {
       public void update(T entity);
       public void saveOrUpdate(T entity);
       public T findById(Serializable id);
-      public List<T> findAll(DetachedCriteria c);
       public PageBean pageQuery(PageBean pageBean);
-      public List<T> findByCriteria(DetachedCriteria dc);
+	  public List<T> findByCriteria(DetachedCriteria dc);
 }

@@ -14,6 +14,7 @@ import org.springframework.expression.spel.ast.Projection;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.iteason.dao.BaseDao;
+import com.iteason.domain.Role;
 import com.iteason.utils.PageBean;
 
 /**
@@ -66,13 +67,6 @@ public class BaseDaoImp<T> extends HibernateDaoSupport implements BaseDao<T> {
 		return (T) getHibernateTemplate().get(clazz, id);
 	}
 
-	@Override
-	public List<T> findAll(DetachedCriteria c) {
-		// 查询全部
-		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(c);
-		return list;
-	}
-
 
 	@Override
 	public PageBean pageQuery(PageBean pageBean) {
@@ -109,11 +103,11 @@ public class BaseDaoImp<T> extends HibernateDaoSupport implements BaseDao<T> {
 	}
 
 
-	@Override
 	public List<T> findByCriteria(DetachedCriteria dc) {
 		// 通过de封装查询条件返回List对象
 		List<T> list = (List<T>) getHibernateTemplate().findByCriteria(dc);
 		return list;
 	}
+
 
 }

@@ -79,14 +79,14 @@
 		</action>
 		
 		<action name="functionAction_*" class="functionAction" method="{1}">
-			<result name="toFunction">
+			<result name="toFunction" type="redirectAction">
 				<param name="namespace">/</param>
 				<param name="actionName">page_admin_function</param>
 			</result>
 		</action>
 		
 		<action name="roleAction_*" class="roleAction" method="{1}">
-			<result name="toRole">
+			<result name="toRole" type="redirectAction">
 				<param name="namespace">/</param>
 				<param name="actionName">page_admin_role</param>
 			</result>

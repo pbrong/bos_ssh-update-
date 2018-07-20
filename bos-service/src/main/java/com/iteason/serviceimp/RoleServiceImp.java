@@ -1,7 +1,11 @@
 package com.iteason.serviceimp;
 
 
+import java.util.List;
+
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,6 +13,7 @@ import com.iteason.dao.RoleDao;
 import com.iteason.domain.Function;
 import com.iteason.domain.Role;
 import com.iteason.service.RoleService;
+import com.iteason.utils.PageBean;
 @Service
 @Transactional
 public class RoleServiceImp implements RoleService{
@@ -27,6 +32,19 @@ public class RoleServiceImp implements RoleService{
 		}
 		
 		
+	}
+
+	@Override
+	public void pageQuery(PageBean pageBean) {
+		// 分页查询
+		roleDao.pageQuery(pageBean);
+	}
+
+	@Override
+	public List<Role> findAll() {
+		// 
+		List<Role> findByCriteria = roleDao.findByCriteria(DetachedCriteria.forClass(Role.class));
+		return findByCriteria;
 	}
 	
 }

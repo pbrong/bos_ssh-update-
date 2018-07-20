@@ -74,6 +74,23 @@
 					</td>
 				</tr>
 	           	<tr><td>备注:</td><td colspan="3"><textarea style="width:80%"></textarea></td></tr>
+          		<td>选择角色:</td>
+	           		<td colspan="3" id="roleTD">
+	           			<script type="text/javascript">
+	           				$(function(){
+	           					//页面加载完成后，发送ajax请求，获取所有的角色数据
+	           					$.post('roleAction_listajax.action',function(data){
+	           						//在ajax回调函数中，解析json数据，展示为checkbox
+	           						for(var i=0;i<data.length;i++){
+	           							var id = data[i].id;
+	           							var name = data[i].name;
+	           							$("#roleTD").append('<input id="'+id+'" type="checkbox" name="roleIds" value="'+id+'"><label for="'+id+'">'+name+'</label>');
+	           						}
+	           					});
+	           				});
+	           			</script>
+	           		</td>
+          
            </table>
        </form>
 	</div>
