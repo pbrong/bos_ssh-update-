@@ -43,7 +43,7 @@ public class BaseDaoImp<T> extends HibernateDaoSupport implements BaseDao<T> {
 	@Override
 	public void save(Object entity) {
 		// 增
-		getHibernateTemplate().save(entity);
+		this.getHibernateTemplate().save(entity);
 	}
 
 	@Override

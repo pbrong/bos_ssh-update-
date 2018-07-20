@@ -12,7 +12,7 @@ import com.iteason.service.RoleService;
 @Service
 @Transactional
 public class RoleServiceImp implements RoleService{
-   @Autowired
+    @Autowired
 	private RoleDao roleDao;
 
 	@Override
