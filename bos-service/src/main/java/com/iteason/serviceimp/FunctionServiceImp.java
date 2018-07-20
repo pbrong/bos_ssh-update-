@@ -20,9 +20,8 @@ public class FunctionServiceImp implements FunctionService {
 	private FunctionDao functionDao;
 	@Override
 	public List<Function> findAll() {
-		DetachedCriteria dc = DetachedCriteria.forClass(Function.class);
 		// 查询所有的功能
-		List<Function> list = functionDao.findByCriteria(dc);
+		List<Function> list = functionDao.findAll();
 		return list;
 	}
 	@Override

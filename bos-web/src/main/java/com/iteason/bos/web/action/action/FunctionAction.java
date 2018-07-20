@@ -49,7 +49,7 @@ public class FunctionAction extends ActionSupport implements ModelDriven<Functio
 		List<Function> list = functionService.findAll();
 		//json配置排除
 		JsonConfig config = new JsonConfig();
-		config.setExcludes(new String[]{"parentFunction","roles","children"});
+		config.setExcludes(new String[]{"parentFunction","roles"});
 		//转json
 		String json = JSONArray.fromObject(list,config).toString();
 		//输出到前台
@@ -94,7 +94,7 @@ public class FunctionAction extends ActionSupport implements ModelDriven<Functio
 		functionService.pageQuery(pageBean);
 		//json配置排除
 		JsonConfig config = new JsonConfig();
-		config.setExcludes(new String[]{"parentFunction","roles","children"});
+		config.setExcludes(new String[]{"parentFunction","roles"});
 		//转json
 		String json = JSONObject.fromObject(pageBean,config).toString();
 		//输出到前台

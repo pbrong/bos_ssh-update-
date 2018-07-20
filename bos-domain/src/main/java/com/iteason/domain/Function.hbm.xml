@@ -7,7 +7,7 @@
             <column name="id" length="32" />
             <generator class="uuid" />
         </id>
-        <many-to-one name="parentFunction" class="com.iteason.domain.Function" fetch="select">
+        <many-to-one name="parentFunction" class="com.iteason.domain.Function" fetch="select" >
             <column name="pid" length="32" />
         </many-to-one>
         <property name="name" type="java.lang.String">
@@ -36,7 +36,7 @@
                 <column name="role_id" length="32" not-null="true" />
             </many-to-many>
         </set>
-        <set name="children" inverse="true">
+        <set name="children" inverse="true" lazy="false">
             <key>
                 <column name="pid" length="32" />
             </key>
