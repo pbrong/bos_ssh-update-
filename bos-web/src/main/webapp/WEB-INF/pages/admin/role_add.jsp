@@ -38,15 +38,15 @@
 		// 授权树初始化
 		var setting = {
 			data : {
-				key : {
-					title : "t"
-				},
-				simpleData : {
-					enable : true
-				}
+					key : {
+						title : "t"
+					},
+					simpleData : {
+						enable : true
+					}
 			},
 			check : {
-				enable : true,
+					enable : true,
 			}
 		};
 		
@@ -67,7 +67,25 @@
 		
 		// 点击保存
 		$('#save').click(function(){
-			location.href='${pageContext.request.contextPath}/page_admin_privilege.action';
+			var array = new Array();
+			var treeObj = $.fn.zTree.getZTreeObj("functionTree");
+	        var nodes = treeObj.getCheckedNodes(true);//获取到被勾选的节点数组
+			//将其拼接成functionIds字符串，用，隔开
+			for(var i = 0; i < nodes.length ; i++){
+				array.push(nodes[i].id);//往后追加
+				array.join(",");
+				//alert(array);
+			}
+			$("#functionIds").val(array.toString());
+			//alert(array.toString());
+	       var v =  $("#roleForm").form("validate");
+	       if(v){
+	    	   $("#roleForm").submit();
+	       }else{
+	    	   $.messager.alert("错误信息","请正确填写","info");
+	       }
+	       
+	        //location.href='${pageContext.request.contextPath}/page_admin_privilege.action';
 		});
 	});
 </script>	
@@ -79,7 +97,8 @@
 			</div>
 		</div>
 		<div region="center" style="overflow:auto;padding:5px;" border="false">
-			<form id="roleForm" method="post">
+			<form id="roleForm" method="post" action="${pageContext.request.contextPath}/roleAction_save.action">
+			<input type="hidden" name="functionIds" id="functionIds">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">角色信息</td>

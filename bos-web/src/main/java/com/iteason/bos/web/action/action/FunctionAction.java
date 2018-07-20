@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import com.iteason.domain.Function;
 import com.iteason.service.FunctionService;
+import com.iteason.utils.Java2Json;
 import com.iteason.utils.PageBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -48,13 +49,7 @@ public class FunctionAction extends ActionSupport implements ModelDriven<Functio
 	public String listajax() throws IOException{
 		List<Function> list = functionService.findAll();
 		//json配置排除
-		JsonConfig config = new JsonConfig();
-		config.setExcludes(new String[]{"parentFunction","roles"});
-		//转json
-		String json = JSONArray.fromObject(list,config).toString();
-		//输出到前台
-		ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
-		ServletActionContext.getResponse().getWriter().print(json);
+		Java2Json.ArrayToJson(list, new String[]{"parentFunction","roles"});
 		return null;
 	}
 	/**
@@ -92,14 +87,7 @@ public class FunctionAction extends ActionSupport implements ModelDriven<Functio
 		DetachedCriteria dc = DetachedCriteria.forClass(Function.class);
 		pageBean.setDc(dc);
 		functionService.pageQuery(pageBean);
-		//json配置排除
-		JsonConfig config = new JsonConfig();
-		config.setExcludes(new String[]{"parentFunction","roles"});
-		//转json
-		String json = JSONObject.fromObject(pageBean,config).toString();
-		//输出到前台
-		ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
-		ServletActionContext.getResponse().getWriter().print(json);
+		Java2Json.ObjectToJson(pageBean,new String[]{"parentFunction","roles"});
 		return NONE;
 	}
 	
