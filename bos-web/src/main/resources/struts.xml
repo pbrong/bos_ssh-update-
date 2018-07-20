@@ -84,5 +84,12 @@
 				<param name="actionName">page_admin_function</param>
 			</result>
 		</action>
+		
+		<action name="roleAction_*" class="roleAction" method="{1}">
+			<result name="toRole">
+				<param name="namespace">/</param>
+				<param name="actionName">page_admin_role</param>
+			</result>
+		</action>
 	</package>
 </struts>

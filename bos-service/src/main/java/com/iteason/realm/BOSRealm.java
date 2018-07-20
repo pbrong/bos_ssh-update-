@@ -52,6 +52,7 @@ public class BOSRealm extends AuthorizingRealm{
 		//添加授权口令
 		//TODO 后期查询数据库
 		info.addStringPermission("staff-list");
+		info.addStringPermission("staff-delete");
 		return info;
 	}
 

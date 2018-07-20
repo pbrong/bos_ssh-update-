@@ -4,32 +4,32 @@
 <hibernate-mapping>
     <class name="com.iteason.domain.Role" table="auth_role" >
         <id name="id" type="java.lang.String">
-            <column name="id" length="32" />
+            <column name="id"  />
             <generator class="assigned" />
         </id>
-        <property name="name" type="java.lang.String">
+        <property name="name" >
             <column name="name" />
         </property>
-        <property name="code" type="java.lang.String">
+        <property name="code" >
             <column name="code" />
         </property>
-        <property name="description" type="java.lang.String">
+        <property name="description" >
             <column name="description" />
         </property>
         <set name="functions" table="role_function" >
             <key>
-                <column name="role_id" length="32" not-null="true" />
+                <column name="role_id"  />
             </key>
             <many-to-many entity-name="com.iteason.domain.Function">
-                <column name="function_id" length="32" not-null="true" />
+                <column name="function_id" />
             </many-to-many>
         </set>
         <set name="users" inverse="true" table="user_role" >
             <key>
-                <column name="role_id" length="32" not-null="true" />
+                <column name="role_id" />
             </key>
             <many-to-many entity-name="com.iteason.domain.User">
-                <column name="user_id" length="32" not-null="true" />
+                <column name="user_id"  />
             </many-to-many>
         </set>
     </class>
