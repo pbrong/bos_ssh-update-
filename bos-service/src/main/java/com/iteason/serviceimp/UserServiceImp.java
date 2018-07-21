@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.iteason.dao.UserDao;
 import com.iteason.domain.User;
 import com.iteason.service.UserService;
+import com.iteason.utils.PageBean;
 @Service
 public class UserServiceImp implements UserService {
 	@Autowired
@@ -29,6 +30,11 @@ public class UserServiceImp implements UserService {
 		// 根据用户id修改密码
 			userDao.editPassword(id,password);
 		
+	}
+	@Override
+	public void pageQuery(PageBean pageBean) {
+		// 角色分页查询
+		userDao.pageQuery(pageBean);
 	}
 	
 

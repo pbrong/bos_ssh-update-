@@ -37,7 +37,7 @@ public class RegionServiceImp implements RegionService {
 	public List<Region> findAll() {
 		//查询所有分区
 		DetachedCriteria dc = DetachedCriteria.forClass(Region.class);
-		List<Region> list = regionDao.findAll(dc);
+		List<Region> list = regionDao.findByCriteria(dc);
 		return list;
 	}
 

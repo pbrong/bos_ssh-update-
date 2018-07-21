@@ -12,6 +12,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ import org.springframework.stereotype.Controller;
 import com.iteason.bos.web.action.base.BaseAction;
 import com.iteason.domain.User;
 import com.iteason.service.UserService;
+import com.iteason.utils.Java2Json;
+import com.iteason.utils.PageBean;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionSupport;
@@ -114,5 +117,41 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	@Override
 	public User getModel() {
 		return user;
+	}
+	
+	private int page;//当前页
+	private int rows;//页容量
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	public int getRows() {
+		return rows;
+	}
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	/**
+	 * 
+	 * @author 阿荣
+	 * @Description:角色的分页查询
+	 * @date: 2018年7月21日 下午12:34:54
+	 * @return
+	 * @throws IOException 
+	 */
+	public String pageQuery() throws IOException{
+		PageBean pageBean = new PageBean();
+		pageBean.setCurrentPage(page);
+		pageBean.setPageSize(rows);
+		DetachedCriteria dc = DetachedCriteria.forClass(User.class);
+		pageBean.setDc(dc);
+		
+		userService.pageQuery(pageBean);
+		
+		Java2Json.ObjectToJson(pageBean,new String[]{"noticebills","roles"});
+		return null;
 	}
 }

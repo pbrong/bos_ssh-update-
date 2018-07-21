@@ -36,7 +36,7 @@ public class SubareaServiceImp implements SubareaService {
 	@Override
 	public List<Subarea> findAll() {
 		// 查找所有subarea对象
-		return subareaDao.findAll(DetachedCriteria.forClass(Subarea.class));
+		return subareaDao.findByCriteria(DetachedCriteria.forClass(Subarea.class));
 	}
 
 	@Override
