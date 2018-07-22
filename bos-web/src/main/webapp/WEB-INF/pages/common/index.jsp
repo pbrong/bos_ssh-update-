@@ -43,7 +43,7 @@
 		
 		// 基本功能菜单加载
 		$.ajax({
-			url : '${pageContext.request.contextPath}/json/menu.json',
+			url : '${pageContext.request.contextPath}/functionAction_findMenu.action',
 			type : 'POST',
 			dataType : 'text',
 			success : function(data) {
@@ -243,7 +243,7 @@
 						</div>
 					</td>
 					<td style="width: *;" class="co1"><span id="online"
-						style="background: url(${pageContext.request.contextPath }/images/online.png) no-repeat left;padding-left:18px;margin-left:3px;font-size:8pt;color:#005590;">在线人数:1</span>
+						style="background: url(${pageContext.request.contextPath }/images/online.png) no-repeat left;padding-left:18px;margin-left:3px;font-size:8pt;color:#005590;">在线人数:${applicationScope.online_number}</span>
 					</td>
 				</tr>
 			</tbody>

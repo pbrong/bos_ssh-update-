@@ -8,4 +8,8 @@ public interface FunctionDao extends BaseDao<Function> {
 
 	List<Function> findAll();
 
+	List<Function> findAllMenu();
+
+	List<Function> findMenuByUserId(String id);
+
 }

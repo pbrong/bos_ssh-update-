@@ -13,4 +13,6 @@ public interface FunctionService {
 
 	void pageQuery(PageBean pageBean);
 
+	List<Function> findMenu();
+
 }

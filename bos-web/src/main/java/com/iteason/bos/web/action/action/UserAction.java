@@ -3,8 +3,7 @@ package com.iteason.bos.web.action.action;
 import java.io.IOException;
 
 import java.util.List;
-
-
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -98,6 +97,24 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 			//通过subject对象获得绑定在线程上的user
 			User getUser = (User) subject.getPrincipal();
 			ServletActionContext.getRequest().getSession().setAttribute("loginUser", getUser);
+			//获得application域
+			Map<String, Object> application = ActionContext.getContext().getApplication();
+			//将登陆人数加一存入application域中
+			int online_number;
+			if(application.get("online_number") == null || (int)application.get("online_number") == 0){
+				online_number = 1;
+				application.put("online_number",online_number);
+			}
+			
+			User getU = (User) ServletActionContext.getRequest().getSession().getAttribute("loginUser");
+			
+			if(getU == null && application.get("online_number") != null){
+				//没有登陆，可以计数加一
+				online_number = (int)application.get("online_number") + 1;
+				application.put("online_number",online_number);
+				
+			}
+			
 			return "home";
 		}else{
 			//输入的验证码错误,设置提示信息，跳转到登录页面
@@ -111,6 +128,14 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	 */
 	public String logout(){
 		ServletActionContext.getRequest().getSession().invalidate();
+		//获得application域
+		Map<String, Object> application = ActionContext.getContext().getApplication();
+		//将在线人数减一存入application域中
+		int online_number;
+		if(application.get("online_number") != null){
+			online_number = (int)application.get("online_number") - 1;
+			application.put("online_number",online_number);
+		}
 		return LOGIN;
 	}
 

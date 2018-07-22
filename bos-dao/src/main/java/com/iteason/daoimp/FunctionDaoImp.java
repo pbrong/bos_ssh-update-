@@ -25,4 +25,18 @@ public class FunctionDaoImp extends BaseDaoImp<Function> implements FunctionDao 
 	  List<Function> list = (List<Function>) getHibernateTemplate().find(hql);
 	  return list;
   }
+
+	@Override
+	public List<Function> findAllMenu() {
+		//查询出所有的权限
+		String hql = "from Function f where f.parentFunction.id is null";
+		return (List<Function>) getHibernateTemplate().find(hql);
+	}
+
+
+	@Override
+	public List<Function> findMenuByUserId(String id) {
+		// 通过id查询function
+		return null;
+	}
 }

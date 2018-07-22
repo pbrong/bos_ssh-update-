@@ -90,6 +90,19 @@ public class FunctionAction extends ActionSupport implements ModelDriven<Functio
 		Java2Json.ObjectToJson(pageBean,new String[]{"parentFunction","roles"});
 		return NONE;
 	}
-	
+	/**
+	 * 
+	 * @author 阿荣
+	 * @Description:通过当前用户返回相应的权限菜单
+	 * @date: 2018年7月21日 下午1:06:55
+	 * @return
+	 * @throws IOException 
+	 */
+	public String findMenu() throws IOException{
+		
+		List<Function> list  = functionService.findMenu();
+		Java2Json.ArrayToJson(list, new String[]{"parentFunction","roles"});
+		return NONE;
+	}
 	
 }

@@ -11,7 +11,6 @@
   
   <dependencies>
 
-
   <dependency>
   	<groupId>com.iteason</groupId>
   	<artifactId>bos-service</artifactId>
