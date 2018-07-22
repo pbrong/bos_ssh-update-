@@ -26,6 +26,8 @@
 <script
 	src="${pageContext.request.contextPath }/js/easyui/locale/easyui-lang-zh_CN.js"
 	type="text/javascript"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/highcharts.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/exporting.js"></script>	
 <script type="text/javascript">
 	function doAdd(){
 		$('#addSubareaWindow').window("open");
@@ -50,6 +52,24 @@
 	
 	function doImport(){
 		alert("导入");
+	}
+	
+	function doShow(){
+		//alert();///////////////
+		$("#subareaChartWindow").window("open");
+		//页面加载完成后，动态创建图表
+		$.post("subareaAction_findSubareasGroupByProvince.action",function(data){
+			$("#test").highcharts({
+				title: {
+		            text: '区域分区分布图'
+		        },
+		        series: [{
+		            type: 'pie',
+		            name: '区域分区分布图',
+		            data: data
+		        }]
+			});
+		});
 	}
 	
 	//工具栏
@@ -83,6 +103,11 @@
 		text : '导出',
 		iconCls : 'icon-undo',
 		handler : doExport
+	},{
+		id : 'button-chart',
+		text : '图表',
+		iconCls : 'icon-search',
+		handler : doShow
 	}];
 	// 定义列
 	var columns = [ [ 
@@ -199,6 +224,15 @@
 	        resizable:false
 	    });
 		
+		$('#subareaChartWindow').window({
+	        title: '添加分区',
+	        width: 600,
+	        modal: true,
+	        shadow: true,
+	        closed: true,
+	        height: 400,
+	        resizable:false
+	    });
 	});
 	function doDblClickRow(rowIndex, rowData){
 		//alert("双击表格数据...");
@@ -246,6 +280,12 @@
 	<div region="center" border="false">
     	<table id="grid"></table>
 	</div>
+	<!-- 图表 -->/////////////
+	<div class="easyui-window" id="subareaChartWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px" >
+		<div id="test"></div>
+	
+	</div>
+	
 	<!-- 添加 修改分区 -->
 	<div class="easyui-window" title="分区添加修改" id="addSubareaWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
 		<div style="height:31px;overflow:hidden;" split="false" border="false" >
