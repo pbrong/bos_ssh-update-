@@ -47,6 +47,13 @@ public class SubareaServiceImp implements SubareaService {
 		return subareaDao.findByCriteria(dc);
 	}
 
+	@Override
+	public List<Object> findSubareasGroupByProvince() {
+		// 根据省查询出相应数量
+		List<Object> list=  subareaDao.findSubareasGroupByProvince();
+		return list;
+	}
+
 
 
 }

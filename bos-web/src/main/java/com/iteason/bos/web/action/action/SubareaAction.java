@@ -20,6 +20,7 @@ import com.iteason.domain.Region;
 import com.iteason.domain.Subarea;
 import com.iteason.service.SubareaService;
 import com.iteason.utils.FileUtils;
+import com.iteason.utils.Java2Json;
 import com.iteason.utils.PageBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -191,5 +192,18 @@ public class SubareaAction extends ActionSupport implements ModelDriven<Subarea>
 		ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
 		ServletActionContext.getResponse().getWriter().print(json);
 		return NONE;
+	}
+	/**
+	 * 
+	 * @author 阿荣
+	 * @Description:查询图表所需的数据
+	 * @date: 2018年7月22日 上午11:58:17
+	 * @return
+	 * @throws IOException 
+	 */
+	public String findSubareasGroupByProvince() throws IOException{
+		List<Object> list = subareaService.findSubareasGroupByProvince();
+		Java2Json.ArrayToJson(list, new String[]{});
+		return null;
 	}
 }

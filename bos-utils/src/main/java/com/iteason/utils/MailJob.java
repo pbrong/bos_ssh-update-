@@ -1,4 +1,4 @@
-/*package com.iteason.utils;
+package com.iteason.utils;
 
 
 import java.util.List;
@@ -17,12 +17,14 @@ import javax.mail.internet.MimeMessage;
 import com.iteason.domain.Workbill;
 
 
-*//**
+/**
  * 发送邮件的作业
  * @author zhaoqx
  *
- *//*
+ */
+ 
 public class MailJob {
+	/*
 	@Resource
 	private IWorkbillDao workbillDao;
 
@@ -97,6 +99,5 @@ public class MailJob {
 
 	public void setSmtpServer(String smtpServer) {
 		this.smtpServer = smtpServer;
-	}
+	}*/
 }
-*/
